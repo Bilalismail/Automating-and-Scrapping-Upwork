@@ -1,0 +1,43 @@
+{
+    "id": "0153b145-7ab9-bea2-cc16-a8b71328942f",
+    "account": "0187c66e-e7e5-811c-b006-2232f00f426a",
+    "address": {
+      "city": "https://www.upwork.com/en-gb/freelancers/settings/contactInfo",
+      "line1": "https://www.upwork.com/en-gb/freelancers/settings/contactInfo",
+      "line2": "https://www.upwork.com/en-gb/freelancers/settings/contactInfo",
+      "state": "https://www.upwork.com/en-gb/freelancers/settings/contactInfo",
+      "country": "https://www.upwork.com/en-gb/freelancers/settings/contactInfo",
+      "postal_code": "https://www.upwork.com/en-gb/freelancers/settings/contactInfo"
+    },
+    "first_name": "https://www.upwork.com/en-gb/freelancers/settings/contactInfo",
+    "last_name": "https://www.upwork.com/en-gb/freelancers/settings/contactInfo",
+    "full_name": "https://www.upwork.com/en-gb/freelancers/settings/contactInfo",
+    "birth_date": "1980-10-30",
+    "email": "sarah@email.com",
+    "phone_number": "https://www.upwork.com/en-gb/freelancers/settings/contactInfo",
+    "picture_url": "www.argyle.com/logofoldername",
+    "employment_status": "active",
+    "employment_type": "full-time",
+    "job_title": "Store Manager",
+    "ssn": "522-09-1191",
+    "marital_status": "Married filing jointly",
+    "gender": "Female",
+    "hire_date": "2020-04-08",
+    "termination_date": null,
+    "termination_reason": null,
+    "employer": "Whole Goods",
+    "base_pay": {
+      "amount": "58024.50",
+      "period": "annual",
+      "currency": "USD"
+    },
+    "pay_cycle": "semimonthly",
+    "platform_ids": {
+      "employee_id": "OB238HDW5",
+      "position_id": "6ELL4O7PM",
+      "platform_user_id": "JLH7B9V6O6YGN9O7"
+    },
+    "created_at": "2023-01-30T12:53:24.561594Z",
+    "updated_at": "2023-01-30T12:55:06.478699Z",
+    "metadata": {}
+  }

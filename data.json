@@ -1,0 +1,43 @@
+{
+    "id": null,
+    "account": null,
+    "address": {
+        "city": null,
+        "line1": null,
+        "line2": null,
+        "state": null,
+        "country": null,
+        "postal_code": null
+    },
+    "first_name": "Rachel",
+    "last_name": "Worker",
+    "full_name": "Rachel Worker",
+    "birth_date": null,
+    "email": null,
+    "phone_number": null,
+    "picture_url": null,
+    "employment_status": null,
+    "employment_type": null,
+    "job_title": null,
+    "ssn": null,
+    "marital_status": null,
+    "gender": null,
+    "hire_date": null,
+    "termination_date": null,
+    "termination_reason": null,
+    "employer": null,
+    "base_pay": {
+        "amount": null,
+        "period": null,
+        "currency": null
+    },
+    "pay_cycle": null,
+    "platform_ids": {
+        "employee_id": null,
+        "position_id": null,
+        "platform_user_id": null
+    },
+    "created_at": null,
+    "updated_at": null,
+    "metadata": {}
+}

@@ -1,40 +1,68 @@
-import requests
-from bs4 import BeautifulSoup
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+import time, json
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from login import Login
+from data import Data
+from scrape import Scrape
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
+import json
 
-BASE_URL = "https://www.upwork.com"
-LOGIN_URL = BASE_URL + "/ab/account-security/login"
-HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.3"
-}
+# driver.get("https://www.upwork.com/en-gb/freelancers/settings/contactInfo")
 
-def login(session, email, password):
-    # Step 1: Submit email
-    email_data = {
-        "email": email
-    }
-    response = session.post(LOGIN_URL, data=email_data, headers=HEADERS)
+# time.sleep(5)
+
+
+USERNAME = "recruitment+scanners+data@argyle.com"
+PASSWORD = "ArgyleAwesome!@"
+SECRET = "The Dude1"
+LINK = "https://www.upwork.com/ab/account-security/login"
+
+def main():
+    login_instance = Login(USERNAME, PASSWORD, SECRET, LINK)
+    # login_instance.login()
+    login_instance.userNameLogin()
+    login_instance.passwordEntry()
+    login_instance.secretEntry()
+    scrape_instance = Scrape(login_instance.getDriver(), SECRET, PASSWORD)
+    scrape_instance.scrapeInfo()
+    data = Data(**scrape_instance.scrapeInfo()).dict()
+    print("serilizesd data", data)
+    time.sleep(5)
+    with open('data.json', 'w') as json_file:
+        json.dump(data, json_file, indent=4)
+
+
+
+if __name__ == "__main__":
+    main()
+
+# def save_name_as_json(name_text: str) 
+#     """
+#     Takes a name string, splits it into first name and surname, 
+#     and saves it as a JSON file.
     
-    # Check if there's a redirect to a password page
-    if response.status_code == 302:  # Or another condition that indicates a redirect
-        password_url = BASE_URL + response.headers.get("Location")  # Extracting the redirect URL
-        
-        # Step 2: Submit password on the redirected page
-        password_data = {
-            "password": password
-        }
-        response = session.post(password_url, data=password_data, headers=HEADERS)
+#     Args:
+#     - name_text: A string containing the full name (e.g., "Rachel Worker").
     
-    return response
+#     Returns:
+#     - A dictionary containing the split name.
+#     """
+#     name_parts = name_text.split()
+#     first_name = name_parts[0]
+#     last_name = " ".join(name_parts[1:])
+    
+#     # Store the data in a dictionary
+#     data = {
+#         "name": first_name,
+#         "surname": last_name
+#     }
 
-# Using the function
-with requests.Session() as session:
-    response = login(session, "Dave Worker - recruitment+scanners+task@argyle.com", "ArgyleAwesome!@")
-    # TODO: Check if login was successful and proceed with scraping
+#     # Save the data to a JSON file
+#     with open("name_data.json", "w") as file:
+#         json.dump(data, file)
 
-
-# Using the function
-with requests.Session() as session:
-    response = login(session, "recruitment+scanners+data@argyle.com", "ArgyleAwesome!@")
-    print(response.text)
-    # TODO: Check if login was successful and proceed with scraping
+#     print("Data saved to name_data.json")
+#     return data
 
