@@ -20,9 +20,6 @@ def main():
     login_instance.downloadPDF()
     scrape_instance = Scrape(login_instance.getDriver(), SECRET, PASSWORD)
     data = Data(**scrape_instance.scrapeInfo()).dict()
-    
-    scrape_instance.dataFromPDF()
-    time.sleep(5)
     with open('data.json', 'w') as json_file:
         json.dump(data, json_file, indent=4)
 
