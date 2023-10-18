@@ -239,5 +239,5 @@ class Scrape:
 
     def scrapeInfo(self):
         self.dataFromURL()
-        # self.dataFromPDF()
+        self.dataFromPDF()
         return self.userData
