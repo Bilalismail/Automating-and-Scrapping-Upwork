@@ -1,7 +1,7 @@
 import time
 from selenium.webdriver.common.by import By
 import PyPDF2
-import re
+import re, os
 
 
 class Scrape:
@@ -57,9 +57,11 @@ class Scrape:
         return self.driver.current_url == "https://www.upwork.com/en-gb/nx/find-work/best-matches"
 
     def dataFromPDF(self):
-        # Define the path to your PDF file
+       
         pdf_path = "./downloads/certificate-of-earnings.pdf/certificate-of-earnings.pdf"
-
+        if not os.path.exists(pdf_path):
+            print("PDF file does not exist. Skipping PDF processing.")
+            return
         # Open the PDF file
         with open(pdf_path, "rb") as file:
             # Create a PDF reader object
@@ -234,8 +236,6 @@ class Scrape:
         except:
             print("cp Not needed, page at:", self.driver.current_url)
 
-    def enterPage(self):
-        pass
 
     def scrapeInfo(self):
         self.dataFromURL()

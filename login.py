@@ -73,7 +73,7 @@ class Login:
             secret_elem.send_keys(self.secretAnswer)
             self.driver.find_element(By.ID, "login_control_continue").click()
             time.sleep(7)
-            if self.driver.url == "www.upwork.com/en-gb/nx/find-work/best-matches":
+            if self.driver.current_url == "www.upwork.com/en-gb/nx/find-work/best-matches":
                 self.loggedIn == True
         elif "www.upwork.com/en-gb/nx/find-work/best-matches" in self.driver.current_url:
             print("Logged in successfully without entering secret pass")
@@ -90,6 +90,12 @@ class Login:
     def downloadPDF(self):
         url = "https://www.upwork.com/en-gb/ab/payments/reports/certificate-of-earnings.pdf"
         self.driver.get(url)
+
+        try:
+            url = "https://www.upwork.com/en-gb/ab/payments/reports/certificate-of-earnings.pdf"
+            self.driver.get(url)
+        except NoSuchElementException:
+            print("Failed at pdf page")
         time.sleep(10)  # Adjust this delay as needed. It's for ensuring the file gets downloaded.
 
     def close(self):
