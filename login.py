@@ -5,17 +5,39 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 import time
 
+import os
+
+# Get the absolute path of the current script's directory
+project_directory = os.path.dirname(os.path.abspath(__file__))
+
+# Create a path to save the PDF (e.g., in a folder named 'downloads' within the project directory)
+save_path = os.path.join(project_directory, 'downloads', 'certificate-of-earnings.pdf')
+if not os.path.exists(os.path.join(project_directory, 'downloads')):
+    os.makedirs(os.path.join(project_directory, 'downloads'))
+
+
 class Login:
     def __init__(self, email, password, secretAnswer, entryPage):
         self.email = email
         self.password = password
         self.secretAnswer = secretAnswer
-        self.driver = self.init_browser()
         self.entryPage = entryPage
         self.loggedIn = False
+        self.driver = self.init_browser()
+
     def init_browser(self):
-        """Initialize the Chrome browser."""
-        return webdriver.Chrome()
+        """Initialize the Chrome browser with custom options."""
+        chrome_options = webdriver.ChromeOptions()
+        prefs = {
+            "download.default_directory": save_path,
+            "download.prompt_for_download": False,
+            "download.directory_upgrade": True,
+            "plugins.always_open_pdf_externally": True,  # This should handle PDFs
+            "pdfjs.disabled": True  # Disables the built-in PDF viewer
+        }
+        chrome_options.add_experimental_option('prefs', prefs)
+        return webdriver.Chrome(options=chrome_options)  # Notice the change here
+
 
     def wait_for_element(self, by, value, timeout=10):
         try:
@@ -29,13 +51,11 @@ class Login:
 
     def userNameLogin(self):
         self.driver.get(self.entryPage)
-        
         try:
             username_elem = self.wait_for_element(By.ID, "login_username")
             username_elem.send_keys(self.email)
             self.driver.find_element(By.ID, "login_password_continue").click()
             time.sleep(5)
-
         except NoSuchElementException:
             print(f"Failed to get expected page: {self.entryPage}")
 
@@ -49,7 +69,7 @@ class Login:
 
     def secretEntry(self):
         secret_elem = self.wait_for_element(By.ID, "login_answer")
-        if secret_elem:  # check if secret_elem is not None
+        if secret_elem:
             secret_elem.send_keys(self.secretAnswer)
             self.driver.find_element(By.ID, "login_control_continue").click()
             time.sleep(7)
@@ -63,8 +83,15 @@ class Login:
 
     def login(self):
         self.userNameLogin()
+
     def getDriver(self):
         return self.driver
+
+    def downloadPDF(self):
+        url = "https://www.upwork.com/en-gb/ab/payments/reports/certificate-of-earnings.pdf"
+        self.driver.get(url)
+        time.sleep(10)  # Adjust this delay as needed. It's for ensuring the file gets downloaded.
+
     def close(self):
         """Close the browser."""
         self.driver.quit()
