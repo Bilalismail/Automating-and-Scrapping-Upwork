@@ -1,8 +1,13 @@
-<h1 align="center"><b>Spacedrive</b></h1>
+<h1 align="center"><b>Scanning Task</b></h1>
 
+
+## Project Setup
 
 ### Compile and Hot-Reload for Development
-
 ```sh
-npm run dev
+pip install -r requirements.txt
+```
+### Compile and Hot-Reload for Development
+```sh
+python main.py
 ```
