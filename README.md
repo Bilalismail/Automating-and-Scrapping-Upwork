@@ -3,11 +3,12 @@
 
 ## Project Setup
 
-### Compile and Hot-Reload for Development
+### Installing libraries
 ```sh
 pip install -r requirements.txt
 ```
-### Compile and Hot-Reload for Development
+### Run Script
 ```sh
 python main.py
 ```
+
