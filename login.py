@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
+from selenium.webdriver.chrome.service import Service
 import time
 
 import os
@@ -36,7 +37,8 @@ class Login:
             "pdfjs.disabled": True  # Disables the built-in PDF viewer
         }
         chrome_options.add_experimental_option('prefs', prefs)
-        return webdriver.Chrome(options=chrome_options)  # Notice the change here
+        service = Service(executable_path='./chromedriver')
+        return webdriver.Chrome(service=service, options=chrome_options)  # Notice the change here
 
 
     def wait_for_element(self, by, value, timeout=10):

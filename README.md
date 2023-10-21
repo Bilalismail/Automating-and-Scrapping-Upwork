@@ -12,3 +12,6 @@ pip install -r requirements.txt
 python main.py
 ```
 
+## Chromedriver
+
+<p>To run this script you need to </p>
