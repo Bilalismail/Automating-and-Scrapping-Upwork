@@ -1,5 +1,3 @@
-<h1 align="center"><b>Scanning Task</b></h1>
-
 
 ## Project Setup
 
